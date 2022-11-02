@@ -59,5 +59,9 @@ public class InvoiceLine
                 ", price=" + price +
                 '}';
     }
+
+    public String getDataAsCSV() {
+        return "" + getInv().getNum() + "," + getName() + "," + getPrice() + "," + getTotal();
+    }
 }
 

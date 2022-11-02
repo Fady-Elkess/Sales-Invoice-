@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import view.SIGFrame;
 
@@ -8,10 +9,14 @@ public class HeaderTableModel extends AbstractTableModel{
     private String [] columns ={"Num","Customer","Date","Total"};
     private ArrayList<InvoiceHeader>headers;
 
-    public HeaderTableModel(ArrayList<InvoiceHeader>headers) {
-        this.headers = headers;
+    public HeaderTableModel(List<InvoiceHeader> headers) {
+        this.headers = (ArrayList<InvoiceHeader>) headers;
     }
 
+
+    public List<InvoiceHeader> getInvoicesArray() {
+        return headers;
+    }
 
     @Override
     public boolean isCellEditable(int rowIndex,int columnIndex)

@@ -8,6 +8,7 @@ import controller.Controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import model.HeaderTableModel;
@@ -51,8 +52,8 @@ public class SIGFrame extends javax.swing.JFrame {
         deleteInvBtn.addActionListener(listener);
         createItemBtn = new javax.swing.JButton();
         createItemBtn.addActionListener(listener);
-        cancelBtn = new javax.swing.JButton();
-        cancelBtn.addActionListener(listener);
+        DeleteItemBtn = new javax.swing.JButton();
+        DeleteItemBtn.addActionListener(listener);
         invCustLbl = new javax.swing.JLabel();
         invDateLbl = new javax.swing.JLabel();
         invNumLbl = new javax.swing.JLabel();
@@ -116,10 +117,10 @@ public class SIGFrame extends javax.swing.JFrame {
 
         createItemBtn.setText("Create Item");
 
-        cancelBtn.setText("Cancel");
-        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+        DeleteItemBtn.setText("Delete Item");
+        DeleteItemBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelBtnActionPerformed(evt);
+                DeleteItemBtnActionPerformed(evt);
             }
         });
 
@@ -176,7 +177,7 @@ public class SIGFrame extends javax.swing.JFrame {
                                                 .addGap(181, 181, 181)
                                                 .addComponent(createItemBtn)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(cancelBtn)))
+                                                .addComponent(DeleteItemBtn)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -207,7 +208,7 @@ public class SIGFrame extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(createItemBtn)
-                                                .addComponent(cancelBtn))
+                                                .addComponent(DeleteItemBtn))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(deleteInvBtn)
                                                 .addComponent(createInvBtn)))
@@ -221,7 +222,7 @@ public class SIGFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {
+    private void DeleteItemBtnActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -259,9 +260,7 @@ public class SIGFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                SIGFrame obj = new SIGFrame();
-                obj.listener.load("InvoiceHeader.csv","InvoiceLine.csv");
-                obj.setVisible(true);
+                new SIGFrame().setVisible(true);
             }
         });
     }
@@ -269,7 +268,7 @@ public class SIGFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify
     private javax.swing.JMenuItem LoadMenuItem;
     private javax.swing.JMenuItem SaveMenuItem;
-    private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton DeleteItemBtn;
     private javax.swing.JButton createInvBtn;
     private javax.swing.JButton createItemBtn;
     private javax.swing.JButton deleteInvBtn;
@@ -290,10 +289,25 @@ public class SIGFrame extends javax.swing.JFrame {
     // End of variables declaration
     private Controller listener = new Controller(this);
     private ArrayList<InvoiceHeader> invoices = new ArrayList<>();
+
+    private List<InvoiceHeader> invoicesArray = new ArrayList<>();
     public static DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private HeaderTableModel headerTableModel;
     private LineTableModel lineTableModel;
 
+    private InvoiceLineDialog lineDialog;
+
+    private InvoiceHeaderDialog headerDialog;
+
+    public Controller getListener() {
+        return listener;
+    }
+    public InvoiceLineDialog getLineDialog() {
+        return lineDialog;
+    }
+    public void setLineDialog(InvoiceLineDialog lineDialog) {
+        this.lineDialog = lineDialog;
+    }
     public LineTableModel getLineTableModel() {
         return lineTableModel;
     }
@@ -303,7 +317,9 @@ public class SIGFrame extends javax.swing.JFrame {
         lineTable.setModel(lineTableModel);
     }
 
-
+    public List<InvoiceHeader> getInvoicesArray() {
+        return invoicesArray;
+    }
 
     public JTable getHeaderTable() {
         return headerTable;
@@ -352,5 +368,12 @@ public class SIGFrame extends javax.swing.JFrame {
         }
         return null;
     }
+    public InvoiceHeaderDialog getHeaderDialog() {
+        return headerDialog;
+    }
+    public void setHeaderDialog(InvoiceHeaderDialog headerDialog) {
+        this.headerDialog = headerDialog;
+    }
+
 
 }

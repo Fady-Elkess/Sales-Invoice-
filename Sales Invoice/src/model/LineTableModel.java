@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import view.SIGFrame;
 
@@ -12,7 +13,9 @@ public class LineTableModel extends AbstractTableModel {
         this.lines = lines;
     }
 
-
+    public ArrayList<InvoiceLine> getInvoiceLines() {
+        return lines;
+    }
     @Override
     public int getRowCount() {
         return lines.size();

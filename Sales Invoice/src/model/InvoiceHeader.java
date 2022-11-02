@@ -1,5 +1,7 @@
 package model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -65,5 +67,15 @@ public class InvoiceHeader
                 ", date=" + date +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public void addInvLine(InvoiceLine line){
+        getLines().add(line);
+
+    }
+
+    public String getDataAsCSV() {
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        return "" + getNum() + "," + df.format(getDate()) + "," + getName();
     }
 }
